@@ -26,17 +26,9 @@ def proof_of_work(last_proof):
     proof = 0
     #  TODO: Your code here
     
-    # encode last proof
-    last_proof_encode = f"{last_proof}".encode()
-    # find proof hash
-    proof_hash = hashlib.sha256(last_proof_encode).hexdigest()
-    
-    while valid_proof(proof_hash, proof) is False:
-        if (timer() - start <=5): 
-            proof += 1
-        else:
-            proof = 0
-            break
+    while valid_proof(last_proof, proof) is False:
+        proof -= 1
+        
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
 
@@ -54,19 +46,21 @@ def valid_proof(last_hash, proof):
     # current_hash = hashlib.sha256(f'{proof}'.encode()).hexdigest()
     
     # return last_hash[-6:] == current_hash[:6]
+    
+    # encode last proof
+    last_proof = f"{last_hash}".encode()
+    # use sha256
+    last_hash = hashlib.sha256(last_proof).hexdigest()
 
-    # find last hash proof (slice -6)
-    last_hash_proof = last_hash[-6:]
-    # encode proof
+    # encode guess proof
     guess = f"{proof}".encode()
     # use sha256
     guess_hash = hashlib.sha256(guess).hexdigest()
-    # if sha256 slice 6 == last hash proof
-    if guess_hash[:6] == last_hash_proof:
-        # return TRUE
-        return True
-    # else return FALSE
-    return False
+
+    # last hash (slice -6)
+    # guess hash (slice 6)
+    # return True of False
+    return guess_hash[:6] == last_hash[-6:]
 
 
 if __name__ == '__main__':
