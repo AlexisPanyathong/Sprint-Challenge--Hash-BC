@@ -12,6 +12,21 @@ def get_indices_of_item_weights(weights, length, limit):
     """
     YOUR CODE HERE
     """
+    # For loop: for i in range of 0 and the length of the weights.
+    for i in range(0, len(weights)):
+        
+        # Set wt to weights[i]
+        wt = weights[i]
+        
+        # Set retrieve to a hash table that passes in the ht and limit of the weights
+        retrieve = hash_table_retrieve(ht, limit-wt)
+        
+        if retrieve is not None:
+            first = max(i, retrieve)
+            second = min(i, retrieve)
+            return (first, second)
+        
+        hash_table_retrieve(ht, wt, i)
 
     return None
 
