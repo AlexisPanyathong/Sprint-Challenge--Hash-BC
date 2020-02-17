@@ -24,11 +24,22 @@ This sprint challenge is divided up into three parts:  Hash tables coding, block
 
 Explain in detail the workings of a dynamic array:
 * What is the runtime complexity to access an array, add or remove from the front, and add or remove from the back?
-* What is the worse case scenario if you try to extend the storage size of a dynamic array?
+The runtime complexity to access an array is: (letter O) O(1) because it only takes one step. Adding or removing to the front of an array is O(n) because it requires re-indexing each element that follows it, and adding or removing from the back is O(1) because the array does not require a shift and only requires one step.
 
-Explain how a blockchain is structured. What are the blocks, what is the chain? How is the data organized?
+* What is the worse case scenario if you try to extend the storage size of a dynamic array?
+It will take a runtime of (letter O) O(n) because you will be doubling the array, which makes it slower.
+
+#### Explain how a blockchain is structured. What are the blocks, what is the chain? How is the data organized?
+Blockchain starts with genesis block followed by inter-connected blocks. Each block contains a reference, which is the hash of the preceding block. The hash serves as a link to the previous block and establishes the order throughout the chain of blocks. The blocks allow for secure transfer of data and are used for keeping a set of transactions. The chain is a sequence of blocks in a specific order.
+If one is changed and you must change all of them.
  
-Explain how proof of work functions. How does it operate. How does this protect the chain from attack. What kind of attack is possible?
+#### Explain how proof of work functions. How does it operate. How does this protect the chain from attack. What kind of attack is possible?
+A proof-of-work is used to confirm transactions and produce new blocks to the chain, it prevents attacks and protects the chain  (by requiring some work from the service requester, usually meaning processing time by a computer.)
+Miners compete against each other to complete transactions on the network.
+A possible kind of attack is a 51% attack, or majority attack, it is a case when a user or users control most of the mining power. The attackers get enough power to control most events in the network. They can reverse transactions.
+
+
+(They can monopolize generating new blocks and receive rewards since they’re able to prevent other miners from completing blocks.) 
 
 ## Project Set Up
 

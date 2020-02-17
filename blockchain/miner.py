@@ -25,7 +25,10 @@ def proof_of_work(last_proof):
     print("Searching for next proof")
     proof = 0
     #  TODO: Your code here
-
+    
+    while valid_proof(last_proof, proof) is False:
+        proof -= 1
+        
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
 
@@ -40,7 +43,24 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    # current_hash = hashlib.sha256(f'{proof}'.encode()).hexdigest()
+    
+    # return last_hash[-6:] == current_hash[:6]
+    
+    # encode last proof
+    last_proof = f"{last_hash}".encode()
+    # use sha256
+    last_hash = hashlib.sha256(last_proof).hexdigest()
+
+    # encode guess proof
+    guess = f"{proof}".encode()
+    # use sha256
+    guess_hash = hashlib.sha256(guess).hexdigest()
+
+    # last hash (slice -6)
+    # guess hash (slice 6)
+    # return True of False
+    return guess_hash[:6] == last_hash[-6:]
 
 
 if __name__ == '__main__':
@@ -48,7 +68,8 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         node = sys.argv[1]
     else:
-        node = "https://lambda-coin.herokuapp.com/api"
+        # node = "https://lambda-coin.herokuapp.com/api"
+        node = "https://lambda-coin-test-1.herokuapp.com/api"
 
     coins_mined = 0
 
